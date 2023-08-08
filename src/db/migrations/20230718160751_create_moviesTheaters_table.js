@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable("movies-theaters", (table) => {
+  return knex.schema.createTable("movies_theaters", (table) => {
     table.increments("movies-theaters_id").primary();
     table.boolean("is_showing");
     table.integer("theater_id").unsigned().notNullable();
@@ -21,5 +21,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable("movies-theaters");
+  return knex.schema.dropTable("movies_theaters");
 };
