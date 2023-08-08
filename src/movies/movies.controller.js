@@ -19,9 +19,43 @@ async function movieExists(req, res, next) {
         return next();
     }
     next({ status: 404, message: `Movie cannot be found.` });
-}
+};
 
+async function theatersByMovieId(req, res, next) {
+    const movieId = req.params.movieId;
+    const theaters = await service.theatersByMovieId(movieId);
+
+    if (!theaters || theaters.length === 0) {
+        return next({
+        status: 404,
+        message: `Theaters not found for movie with ID ${movieId}.`,
+        });
+    }
+
+    res.json({ data: theaters });
+};
+
+async function reviewsWithCriticByMovieId(req, res, next) {
+    const { movieId } = req.params;
+    try {
+      const reviews = await service.reviewsWithCriticByMovieId(movieId);
+
+      if (!reviews || reviews.length === 0) {
+        return next({
+          status: 404,
+          message: `Reviews not found for movie with ID ${movieId}.`,
+        });
+      }
+  
+      res.json({ data: reviews });
+    } catch (error) {
+      next(error);
+    }
+};
+  
 module.exports = {
     list: [asyncErrorBoundary(list)],
     read: [asyncErrorBoundary(movieExists), read],
+    theatersByMovieId: [asyncErrorBoundary(theatersByMovieId)],
+    reviewsWithCriticByMovieId: [asyncErrorBoundary(reviewsWithCriticByMovieId)],
 };
