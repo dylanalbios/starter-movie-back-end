@@ -8,10 +8,20 @@ async function list(req, res) {
 };
 
 async function read(req, res) {
-    res.json({ data: res.locals.movies });
+    res.json({ data: res.locals.movie });
 };
+
+async function movieExists(req, res, next) {
+    const movie = await service.read(req.params.movieId);
+
+    if (movie) {
+        res.locals.movie = movie;
+        return next();
+    }
+    next({ status: 404, message: `Movie cannot be found.` });
+}
 
 module.exports = {
     list: [asyncErrorBoundary(list)],
-    read: [asyncErrorBoundary(read)],
+    read: [asyncErrorBoundary(movieExists), read],
 };
