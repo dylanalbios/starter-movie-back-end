@@ -14,8 +14,8 @@ function list(isShowing) {
     return query;
 };
 
-function read(movieId) {
-    return knex(tableName).select("*").where({ movie_id: movieId }).first();
+function read(movie_id) {
+    return knex(tableName).select("*").where({ movie_id }).first();
 };
 
 module.exports = {
