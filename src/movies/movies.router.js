@@ -5,6 +5,13 @@ const cors = require("cors");
 
 router.use(cors());
 
+router
+    .route("/:movieId/theaters")
+    .get(controller.theatersByMovieId);
+
+router
+    .route("/:movieId/reviews")
+    .get(controller.reviewsWithCriticByMovieId);
 
 router
     .route("/:movieId")
