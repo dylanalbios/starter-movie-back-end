@@ -15,7 +15,8 @@ const list = async () => {
     }));
   
     return theatersWithMovies;
-}
+};
+
 module.exports = {
     list,
-}
+};
