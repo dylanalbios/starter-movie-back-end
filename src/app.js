@@ -11,7 +11,7 @@ const theatersRouter = require('./theaters/theaters.router');
 
 const app = express();
 
-app.use(cors({ origin: "https://starter-movie-front-gctgokpwp-dylanalbios.vercel.app" }))
+app.use(cors({ origin: "https://starter-movie-front-end-taupe.vercel.app" }))
 app.use(express.json());
 
 app.use("/movies", moviesRouter);
