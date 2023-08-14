@@ -9,7 +9,7 @@ const list = (isShowing) => {
         query = query
             .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
             .where({ "movies_theaters.is_showing": true })
-            .groupBy("movies.movie_id");
+            .groupBy("movies.movie_id", "movies_theaters.movies-theaters_id");
     }
     return query;
 };
